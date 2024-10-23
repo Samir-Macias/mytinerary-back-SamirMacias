@@ -1,6 +1,6 @@
 import City from "../../models/City.js";
 
-let create = async (req,res,next) =>{
+let create = async (req, res, next) => {
     try {
         let city = req.body
         let all = await City.create(city)
@@ -12,4 +12,4 @@ let create = async (req,res,next) =>{
     }
 }
 
-export {create}
+export { create }
