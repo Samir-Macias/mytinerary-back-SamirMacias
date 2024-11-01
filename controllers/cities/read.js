@@ -15,7 +15,6 @@ let allCities = async (req, res, next) => {
 
 let idCities = async (req, res) => {
     try {
-
         console.log(req.params);
 
         let idQuery = req.params.id
