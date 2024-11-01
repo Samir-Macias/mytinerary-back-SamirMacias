@@ -2,13 +2,16 @@ import City from "../../models/City.js";
 
 let updateCities = async (req, res, next) => {
     try {
-       
+
         let city = req.body
-        await City.updateOne(
+        let upd = await City.updateOne(
             { _id: city._id },
-            { city: req.body.city }          
+            { price: city.price, rating: city.rating, weather: city.weather }
         )
-        return res.status(200).json({ response: 'updated' })   
+        return res.status(200).json({
+            response: upd
+        })
+
     } catch (error) {
         next(error)
     }
@@ -18,17 +21,20 @@ let updateCities = async (req, res, next) => {
 
 let updateManyCities = async (req, res, next) => {
     try {
-       
+
         let city = req.body
-        await City.updateMany(
-            { _id: city._id },
-            { city: req.body.city }          
+        let updAll = await City.updateMany(
+            { rating: city.rating },
+            { price: city.price, rating: city.rating, weather: city.weather }
         )
-        return res.status(200).json({ response: 'updated all' })   
+        return res.status(200).json({
+            response: updAll
+        })
+
     } catch (error) {
         next(error)
     }
 
 }
 
-export {updateCities, updateManyCities}   
+export { updateCities, updateManyCities }   

@@ -11,9 +11,9 @@ router.get('/all', allCities)
 router.get('/id/:id', idCities)
 router.get('/filter', cityFilter)
 router.post('/create', create)
-router.put('update', updateCities)
-router.put('updateall', updateManyCities)
-router.delete('delete', deleteCity)
-router.delete('deleteall', deleteAllCities)
+router.put('/update', updateCities)
+router.put('/updateall', updateManyCities)
+router.delete('/delete', deleteCity)
+router.delete('/deleteall', deleteAllCities)
 
 export default router
