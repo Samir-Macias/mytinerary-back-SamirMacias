@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { } from "../controllers/iteneraries/read.js";
-import { } from "../controllers/iteneraries/create.js";
+import {create } from "../controllers/iteneraries/create.js";
 import {} from "../controllers/iteneraries/update.js";
 import {  } from "../controllers/iteneraries/deleate.js";
 
