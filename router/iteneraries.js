@@ -1,19 +1,18 @@
 import { Router } from "express";
-import { } from "../controllers/iteneraries/read.js";
+import { allIteneraries, idIteneraries, iteneraryFilter} from "../controllers/iteneraries/read.js";
 import {create } from "../controllers/iteneraries/create.js";
-import {} from "../controllers/iteneraries/update.js";
-import {  } from "../controllers/iteneraries/deleate.js";
+import {updateItenerary} from "../controllers/iteneraries/update.js";
+import { deleteAllIteneary, deleteItenerary  } from "../controllers/iteneraries/deleate.js";
 
 
 const router = Router()
 
-router.get('/all', )
-router.get('/filter', cityFilter)
-router.get('/id/:id', idCities)
+router.get('/all', allIteneraries )
+router.get('/filter', iteneraryFilter)
+router.get('/id/:id', idIteneraries)
 router.post('/create', create)
-router.put('/update', updateCities)
-router.put('/updateall', updateManyCities)
-router.delete('/delete', deleteCity)
-router.delete('/deleteall', deleteAllCities)
+router.put('/update', updateItenerary)
+router.delete('/delete', deleteItenerary)
+router.delete('/deleteall', deleteAllIteneary)
 
 export default router

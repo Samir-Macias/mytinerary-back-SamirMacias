@@ -1,4 +1,4 @@
-import Itenerary from "../../models/Itenerary";
+import Itenerary from "../../models/Itenerary.js";
 
 let deleteItenerary = async (req, res, next) => {
     try {
