@@ -5,7 +5,7 @@ import iteneraryRouter from "./iteneraries.js";
 const router = Router()
 
 router.use('/cities', citiesRouter)
-router.use('/itenerary',iteneraryRouter)
+router.use('/itinerary',iteneraryRouter)
 
 
 

@@ -8,6 +8,8 @@ let schema = new Schema({
     duration: { type: String, required: true },
     likes: { type: String, required: true },
     hashtags: { type: String, required: true },
+    userName: { type: String, required: true },
+    userImage: { type: String, required: true },
     comments:{type: String}, 
     city: {type: Schema.Types.ObjectId, ref: 'cities', required: true}
 }, {

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { allIteneraries, idIteneraries, iteneraryFilter} from "../controllers/iteneraries/read.js";
+import { allIteneraries, idIteneraries, itineraryFilter} from "../controllers/iteneraries/read.js";
 import {create } from "../controllers/iteneraries/create.js";
 import {updateItenerary} from "../controllers/iteneraries/update.js";
 import { deleteAllIteneary, deleteItenerary  } from "../controllers/iteneraries/deleate.js";
@@ -8,7 +8,7 @@ import { deleteAllIteneary, deleteItenerary  } from "../controllers/iteneraries/
 const router = Router()
 
 router.get('/all', allIteneraries )
-router.get('/filter', iteneraryFilter)
+router.get('/filter', itineraryFilter)
 router.get('/id/:id', idIteneraries)
 router.post('/create', create)
 router.put('/update', updateItenerary)
