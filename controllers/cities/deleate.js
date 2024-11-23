@@ -3,13 +3,12 @@ import City from "../../models/City.js";
 
 let deleteCity = async (req, res, next) => {
     try {
-
-        let deletecities = await City.deleteOne({
-            name: req.body.name
-        })
+        const deleted = await City.deleteOne({ name: req.body.name });
         return res.status(200).json({
-            response: deletecities
-        })
+            success: true,
+            message: "City deleted successfully",
+            response: deleted,
+        });
     } catch (error) {
         next(error)
     }
@@ -19,13 +18,12 @@ let deleteCity = async (req, res, next) => {
 
 let deleteAllCities = async (req, res, next) => {
     try {
-
-        let deletecities = await City.deleteMany({
-            name: req.body.name
-        })
+        const deleted = await City.deleteMany({ name: req.body.name });
         return res.status(200).json({
-            response: deletecities
-        })
+            success: true,
+            message: "Cities deleted successfully",
+            response: deleted,
+        });
     } catch (error) {
         next(error)
     }

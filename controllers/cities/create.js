@@ -2,11 +2,12 @@ import City from "../../models/City.js";
 
 let create = async (req, res, next) => {
     try {
-        let city = req.body
-        let all = await City.create(city)
+        const city = await City.create(req.body);
         return res.status(201).json({
-            response: all
-        })
+            success: true,
+            message: "City created successfully",
+            response: city,
+        });
     } catch (error) {
         next(error)
     }

@@ -2,15 +2,15 @@ import City from "../../models/City.js";
 
 let updateCities = async (req, res, next) => {
     try {
-
-        let city = req.body
-        let upd = await City.updateOne(
-            { _id: city._id },
-            { price: city.price, rating: city.rating, weather: city.weather }
-        )
+        const updated = await City.updateOne(
+            { _id: req.body._id },
+            { price: req.body.price, rating: req.body.rating, weather: req.body.weather }
+        );
         return res.status(200).json({
-            response: upd
-        })
+            success: true,
+            message: "City updated successfully",
+            response: updated,
+        });
 
     } catch (error) {
         next(error)
@@ -20,16 +20,18 @@ let updateCities = async (req, res, next) => {
 
 
 let updateManyCities = async (req, res, next) => {
-    try {
 
-        let city = req.body
-        let updAll = await City.updateMany(
-            { rating: city.rating },
-            { price: city.price, rating: city.rating, weather: city.weather }
-        )
+
+    try {
+        const updated = await City.updateMany(
+            { rating: req.body.rating },
+            { price: req.body.price, rating: req.body.rating, weather: req.body.weather }
+        );
         return res.status(200).json({
-            response: updAll
-        })
+            success: true,
+            message: "Cities updated successfully",
+            response: updated,
+        });
 
     } catch (error) {
         next(error)

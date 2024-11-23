@@ -2,10 +2,12 @@ import City from "../../models/City.js";
 
 let allCities = async (req, res, next) => {
     try {
-        let all = await City.find()
+        const cities = await City.find();
         return res.status(200).json({
-            response: all
-        })
+            success: true,
+            message: "Cities retrieved successfully",
+            response: cities,
+        });
     } catch (error) {
         next(error)
     }
@@ -15,13 +17,12 @@ let allCities = async (req, res, next) => {
 
 let idCities = async (req, res) => {
     try {
-        console.log(req.params);
-
-        let idQuery = req.params.id
-        let all = await City.findById(idQuery)
+        const city = await City.findById(req.params.id);
         return res.status(200).json({
-            response: all
-        })
+            success: true,
+            message: "City retrieved successfully",
+            response: city,
+        });
     } catch (error) {
         next(error)
     }
@@ -31,18 +32,14 @@ let idCities = async (req, res) => {
 
 let cityFilter = async (req, res, next) => {
     try {
-
-        let { name } = req.query
-        let query = {}
-
-        if (name) {
-            query.name = { $regex: '^' + name, $options: 'i' }
-        }
-
-        let filter = await City.find(query)
+        const { name } = req.query;
+        const query = name ? { name: { $regex: `^${name}`, $options: "i" } } : {};
+        const cities = await City.find(query);
         return res.status(200).json({
-            response: filter
-        })
+            success: true,
+            message: "Cities filtered successfully",
+            response: cities,
+        });
     } catch (error) {
         next(error)
     }
