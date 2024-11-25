@@ -1,61 +1,70 @@
 import Joi from 'joi-oid';
 
-const schema = Joi.object({
-    name: Joi.string()
-        .min(3)
-        .max(30) 
-        .required()
-        .messages({
-            'any.required': 'NAME_REQUIRED',
-            'string.empty': 'NAME_REQUIRED',
-            'string.min': 'NAME_TOO_SHORT',
-            'string.max': 'NAME_TOO_LONG'
-        }),
-    
+const userSchema = Joi.object({
+    firstName: Joi.string()
+      .min(1)
+      .max(30)
+      .required()
+      .messages({
+        "string.base": "First name must be a string.",
+        "string.empty": "First name is required.",
+        "string.min": "First name must have at least 1 character.",
+        "string.max": "First name must not exceed 50 characters.",
+        "any.required": "First name is required."
+      }),
+  
+    lastName: Joi.string()
+      .min(1)
+      .max(30)
+      .required()
+      .messages({
+        "string.base": "Last name must be a string.",
+        "string.empty": "Last name is required.",
+        "string.min": "Last name must have at least 1 character.",
+        "string.max": "Last name must not exceed 50 characters.",
+        "any.required": "Last name is required."
+      }),
+  
     email: Joi.string()
-        .email({ tlds: { allow: false } }) 
-        .required()
-        .messages({
-            'any.required': 'EMAIL_REQUIRED',
-            'string.email': 'INVALID_EMAIL'
-        }),
-
-    address: Joi.string()
-        .min(5)
-        .max(30) 
-        .required()
-        .messages({
-            'any.required': 'ADDRESS_REQUIRED',
-            'string.empty': 'ADDRESS_REQUIRED',
-            'string.min': 'ADDRESS_TOO_SHORT',
-            'string.max': 'ADDRESS_TOO_LONG'
-        }),
-
-    phone: Joi.string()
-        .pattern(/^[0-9]{7,15}$/) 
-        .required()
-        .messages({
-            'any.required': 'PHONE_REQUIRED',
-            'string.pattern.base': 'INVALID_PHONE'
-        }),
-
+      .email()
+      .required()
+      .messages({
+        "string.email": "Email must be a valid email address.",
+        "string.empty": "Email is required.",
+        "any.required": "Email is required."
+      }),
+  
+    photoUrl: Joi.string()
+      .uri()
+      .required()
+      .messages({
+        "string.uri": "Photo URL must be a valid URL.",
+        "string.empty": "Photo URL is required.",
+        "any.required": "Photo URL is required."
+      }),
+  
     password: Joi.string()
-        .min(8) 
-        .max(18) 
-        .pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/) 
-        .required()
-        .messages({
-            'any.required': 'PASSWORD_REQUIRED',
-            'string.min': 'PASSWORD_TOO_SHORT',
-            'string.max': 'PASSWORD_TOO_LONG',
-            'string.pattern.base': 'PASSWORD_WEAK'
-        }),
+      .pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d)[A-Za-z\d!@#$%^&*]{1,12}$/)
+      .required()
+      .messages({
+        "string.pattern.base": "Password must have at least 1 uppercase letter, 1 special character, and 1 number, with a maximum of 12 characters.",
+        "string.empty": "Password is required.",
+        "any.required": "Password is required."
+      }),
+  
+    online: Joi.boolean()
+      .required()
+      .messages({
+        "boolean.base": "Online must be a boolean.",
+        "any.required": "Online is required."
+      }),
+  
+    country: Joi.string()
+      .required()
+      .messages({
+        "string.empty": "Country is required.",
+        "any.required": "Country is required."
+      }),
+  });
 
-    online: Joi.boolean() 
-        .required()
-        .messages({
-            'any.required': 'ONLINE_STATUS_REQUIRED'
-        }),
-});
-
-export default schema;
+export default userSchema;

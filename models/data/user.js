@@ -11,6 +11,7 @@ const users = [
       photoUrl: "https://example.com/photos/john.jpg",
       password: "Password1!",
       online: true, // Usuario online
+      country: "España"
     },
     {
       firstName: "Jane",
@@ -19,6 +20,7 @@ const users = [
       photoUrl: "https://example.com/photos/jane.jpg",
       password: "Secure#2",
       online: true, // Usuario online
+      country: "Tailandia"
     },
     {
       firstName: "Alice",
@@ -27,6 +29,7 @@ const users = [
       photoUrl: "https://example.com/photos/alice.jpg",
       password: "Admin@3!",
       online: false,
+      country: "Turquía"
     },
     {
       firstName: "Charlie",
@@ -35,6 +38,7 @@ const users = [
       photoUrl: "https://example.com/photos/charlie.jpg",
       password: "Test@123",
       online: false,
+      country: "Canadá"
     },
     {
       firstName: "Eve",
@@ -43,6 +47,7 @@ const users = [
       photoUrl: "https://example.com/photos/eve.jpg",
       password: "Good$5Job",
       online: false,
+      country: "china"
     },
     {
       firstName: "Tom",
@@ -51,6 +56,7 @@ const users = [
       photoUrl: "https://example.com/photos/tom.jpg",
       password: "Strong@9",
       online: false,
+      country: "Usa"
     },
     {
       firstName: "Lucy",
@@ -59,6 +65,7 @@ const users = [
       photoUrl: "https://example.com/photos/lucy.jpg",
       password: "Pass#321",
       online: false,
+      country: "Portugal"
     },
     {
       firstName: "Oscar",
@@ -67,6 +74,7 @@ const users = [
       photoUrl: "https://example.com/photos/oscar.jpg",
       password: "Valid#99",
       online: false,
+      country: "Egipto"
     },
     {
       firstName: "Sophia",
@@ -75,6 +83,7 @@ const users = [
       photoUrl: "https://example.com/photos/sophia.jpg",
       password: "Kingdom@4",
       online: false,
+      country: "Argentina"
     },
     {
       firstName: "Liam",
@@ -83,6 +92,7 @@ const users = [
       photoUrl: "https://example.com/photos/liam.jpg",
       password: "Qwerty#2",
       online: false,
+      country: "Grecia"
     },
   ];
 

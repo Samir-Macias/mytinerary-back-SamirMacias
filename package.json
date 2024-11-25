@@ -8,7 +8,9 @@
     "start": "node ./server.js",
     "dev": "nodemon ./server.js",
     "dataCities": "node ./models/data/cities.js",
-    "dataIteneraries": "node ./models/data/iteneraries.js"
+    "dataIteneraries": "node ./models/data/iteneraries.js",
+    "dataUsers": "node ./models/data/user.js"
+
   },
   "keywords": [],
   "author": "",

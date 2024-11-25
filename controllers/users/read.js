@@ -5,25 +5,14 @@ let allUsers = async (req, res, next) => {
 
         let filter = {};
 
-        if (req.query.name) {
-            filter.name = req.query.name;
+        if (req.query.firstName) {
+            filter.name = req.query.firstName;
         }
         if (req.query.email) {
             filter.email = req.query.email;
         }
-        if (req.query.address) {
-            filter.address = req.query.address;
-        }
-        if (req.query.phone) {
-
-            const phoneValue = Number(req.query.phone);
-            if (!isNaN(phoneValue)) {
-                filter.phone = { $gte: phoneValue };
-            }
-        }
-        if (req.query.online) {
-
-            filter.online = req.query.online === 'true';
+        if (req.query.lastName) {
+            filter.address = req.query.lastName;
         }
 
         let all = await User.find(filter);
@@ -51,4 +40,15 @@ let idUser = async (req, res) => {
 
 }
 
-export { allUsers, idUser }
+let userValidate = async (req, res, next) => {
+    try {
+        return res.status(200).json({
+            success: true,
+            response: req.user
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
+export { allUsers, idUser, userValidate }

@@ -4,7 +4,7 @@ let deleteUser = async (req, res, next) => {
     try {
 
         let deleateUser = await User.deleteOne({
-            name: req.body.name
+            email: req.body.email
         })
         return res.status(200).json({
             response: deleateUser

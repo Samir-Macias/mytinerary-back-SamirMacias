@@ -1,54 +1,57 @@
-import Joi from 'joi-oid'
+import Joi from "joi-oid";
 
 const updateUserSchema = Joi.object({
-    name: Joi.string()
-        .min(3)
-        .max(30)
-        .optional()
-        .messages({
-            'string.min': 'NAME_TOO_SHORT',
-            'string.max': 'NAME_TOO_LONG'
-        }),
+  firstName: Joi.string()
+    .min(1)
+    .max(30)
+    .messages({
+      "string.base": "First name must be a string.",
+      "string.empty": "First name cannot be empty.",
+      "string.min": "First name must have at least 1 character.",
+      "string.max": "First name must not exceed 30 characters.",
+    }),
 
-    email: Joi.string()
-        .email({ tlds: { allow: false } })
-        .optional()
-        .messages({
-            'string.email': 'INVALID_EMAIL'
-        }),
+  lastName: Joi.string()
+    .min(1)
+    .max(30)
+    .messages({
+      "string.base": "Last name must be a string.",
+      "string.empty": "Last name cannot be empty.",
+      "string.min": "Last name must have at least 1 character.",
+      "string.max": "Last name must not exceed 30 characters.",
+    }),
 
-    address: Joi.string()
-        .min(5)
-        .max(30)
-        .optional()
-        .messages({
-            'string.min': 'ADDRESS_TOO_SHORT',
-            'string.max': 'ADDRESS_TOO_LONG'
-        }),
+  email: Joi.string()
+    .email()
+    .messages({
+      "string.email": "Email must be a valid email address.",
+      "string.empty": "Email cannot be empty.",
+    }),
 
-    phone: Joi.string()
-        .pattern(/^[0-9]{7,15}$/)
-        .optional()
-        .messages({
-            'string.pattern.base': 'INVALID_PHONE'
-        }),
+  photoUrl: Joi.string()
+    .uri()
+    .messages({
+      "string.uri": "Photo URL must be a valid URL.",
+      "string.empty": "Photo URL cannot be empty.",
+    }),
 
-    password: Joi.string()
-        .min(8)
-        .max(18)
-        .pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
-        .optional()
-        .messages({
-            'string.min': 'PASSWORD_TOO_SHORT',
-            'string.max': 'PASSWORD_TOO_LONG',
-            'string.pattern.base': 'PASSWORD_WEAK'
-        }),
+  password: Joi.string()
+    .pattern(/^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*\d)[A-Za-z\d!@#$%^&*]{1,12}$/)
+    .messages({
+      "string.pattern.base": "Password must have at least 1 uppercase letter, 1 special character, and 1 number, with a maximum of 12 characters.",
+      "string.empty": "Password cannot be empty.",
+    }),
 
-    online: Joi.boolean()
-        .optional()
-        .messages({
-            'any.required': 'ONLINE_STATUS_REQUIRED'
-        })
-}).min(1);
+  online: Joi.boolean().messages({
+    "boolean.base": "Online must be a boolean.",
+  }),
 
-export default updateUserSchema
+  country: Joi.string().messages({
+    "string.empty": "Country cannot be empty.",
+  }),
+}).or("firstName", "lastName", "email", "photoUrl", "password", "online", "country")
+  .messages({
+    "object.missing": "At least one field must be provided for update.",
+  });
+
+export default updateUserSchema;

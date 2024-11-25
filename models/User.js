@@ -7,7 +7,7 @@ let schema = new Schema ({
     email: {type: String, required: true},
     photoUrl: {type: String, required: true},
     password: {type: String, required: true}, 
-    online:{type: Boolean, required: true},
+    online:{type: Boolean},
     country:{type: String}
 },{
     timestamps: true

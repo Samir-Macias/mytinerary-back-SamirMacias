@@ -1,12 +1,15 @@
 import jwt from 'jsonwebtoken'
 
-export default (req, res, next) => {
-    const token = jwt.sign(
-        { email: req.body.email || req.user.email },
-        process.env.SECRET,
-        { expiresIn: 60 * 60 * 24 }
-    )
-    req.token = token
-    return next()
+const generateToken = (user) => {
+    if (!user || !user.email) {
+        throw new Error('Email is required to generate a token');
+    }
 
-}
+    return jwt.sign(
+        { email: user.email },  
+        process.env.SECRET,    
+        { expiresIn: 60 * 60 * 24 } 
+    );
+};
+
+export default generateToken;
