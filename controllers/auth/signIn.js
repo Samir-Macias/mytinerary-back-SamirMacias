@@ -1,28 +1,27 @@
 import User from "../../models/User.js";
 
-export default async(req,res,next) =>{
+export default async (req, res, next) => {
     try {
-        await User.findOneAndUpdate(
-            {email: req.body.email || req.user.email},
-            {online: true}
+        await User.findOneAndUpdate(        //Recibe 2 objetos.
+            { email: req.user.email },      //Como lo va a buscar.
+            { online: true }                //Cambia la sig. propiedad.
         )
-        console.log(req);
-      
+        // console.log(req);
+
         return res.status(200).json({
-            success: true,
+            succes: true,
             message: "signed In",
-            user:{
-                firstname: req.user.firstname,
-                lastname: req.user.lastname,
+            user: {
+                firstName: req.user.firstName,
+                lastName: req.user.lastName,
                 email: req.user.email,
                 password: req.user.password,
-                photoUrl: req.user.photoUrl,
+                photo: req.user.photo,
                 country: req.user.country
             },
             token: req.token
         })
-        
     } catch (error) {
-      next(error)  
+        next(error)
     }
 }

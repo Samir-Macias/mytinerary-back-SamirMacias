@@ -9,12 +9,13 @@ import schemaUsersCreated from "../schemas/users/create.js"
 import createHash from "../middlewares/hashPasswords.js"
 import passport from "../middlewares/passport.js";
 import updateUserSchema from "../schemas/users/update.js";
+import generateToken from "../middlewares/generateToken.js";
 
 
 
 const router = Router()
 
-router.post('/register',validator(schemaUsersCreated),accountExists,createHash,register)
+router.post('/register',validator(schemaUsersCreated),accountExists,createHash,generateToken,register)
 router.delete('/delete',passport.authenticate('jwt',{session:false}), deleteUser)
 router.delete('/deleteall',passport.authenticate('jwt',{session:false}), deleteAllUser)
 router.get('/all',passport.authenticate('jwt',{session:false}), allUsers)

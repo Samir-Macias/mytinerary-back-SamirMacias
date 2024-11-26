@@ -5,7 +5,7 @@ let schema = new Schema ({
     firstName: {type: String, required: true },
     lastName: {type: String, required: true},
     email: {type: String, required: true},
-    photoUrl: {type: String, required: true},
+    photoUrl: {type: String,},
     password: {type: String, required: true}, 
     online:{type: Boolean},
     country:{type: String}

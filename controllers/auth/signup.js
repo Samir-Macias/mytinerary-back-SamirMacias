@@ -1,42 +1,44 @@
-import bcryptjs from 'bcryptjs'
-import User from '../../models/User.js'
-import generateToken from '../../middlewares/generateToken.js'
+import bcryptjs from 'bcryptjs';
+import User from "../../models/User.js";
+import generateToken from '../../middlewares/generateToken.js'; 
 
 export default async (req, res, next) => {
     try {
         // Desestructuramos los datos de la solicitud
-        const { email, password, firstName, lastName, country, photoUrl  } = req.body;
+        const { email, password, firstName, lastName, country } = req.body;
 
         // Comprobamos si los campos necesarios están presentes
-        if (!email || !password || !firstName || !lastName || !country || !photoUrl) {
+        if (!email || !password || !firstName || !lastName || !country) {
             return res.status(400).json({ error: 'All fields are required' });
         }
 
         // Verificamos si el usuario ya existe
         const userExists = await User.findOne({ email });
         if (userExists) {
-            return res.status(400).json({ 
-                success: false, 
-                message: 'Email already exists' });
+            return res.status(400).json({ error: 'Email already exists' });
         }
 
-    
-        const hashedPassword = await bcryptjs.hash(password, 10);
+        // Encriptamos la contraseña
+        const hashedPassword = bcryptjs.hashSync(
+            req.body.password,
+            10
+        );    
 
-        // Creamos el nuevo usuario
+        // Creamos un nuevo usuario
         const newUser = new User({
-            firstName,
-            lastName,
-            email,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
             password: hashedPassword,
-            photoUrl,
-            country,
-            online: false
+            photoUrl: req.body.photoUrl,
+            country: req.body.country
         });
 
-        // Guardamos el usuario en la base de datos
+        // Guardamos el nuevo usuario en la base de datos
         await newUser.save();
 
+
+        console.log(newUser);
         // Generamos un token para el nuevo usuario
         const token = generateToken(newUser);
 
@@ -50,10 +52,10 @@ export default async (req, res, next) => {
                 email: newUser.email,
                 country: newUser.country
             },
-            token: token 
+            token: token
         });
     } catch (error) {
         console.error(error);
-        next(error); // Pasamos el error al middleware de manejo de errores
+        next(error); // Pasamos el error al siguiente middleware de manejo de errores
     }
 };

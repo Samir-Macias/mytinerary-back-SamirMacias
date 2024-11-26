@@ -3,6 +3,7 @@ import singIn from "../controllers/auth/signIn.js"
 import singOut from "../controllers/auth/signout.js"
 import singUp from "../controllers/auth/signup.js"
 import singInGoogle from "../controllers/auth/signInGoogle.js"
+import register from "../controllers/users/register.js";
 
 
 import accountNotExists from "../middlewares/accountNotExists.js";
@@ -21,13 +22,13 @@ routerAuth.post('/signOut', passport.authenticate('jwt', { session: false }), si
 routerAuth.post('/signUp', accountExists, singUp);
 
 routerAuth.get(                                                                           
-    '/signIn/google',
+    '/signin/google',
     passportGoogle.authenticate('google', { session: false, scope: ['profile', 'email'] }) 
 )
 
 
 routerAuth.get(                                                 
-    '/signIn/google/callback',
+    '/signin/google/callback',
     passportGoogle.authenticate('google', { session: false, failureRedirect: '/login' }),
     generateToken,
     singInGoogle

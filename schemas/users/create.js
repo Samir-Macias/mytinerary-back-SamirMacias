@@ -35,12 +35,9 @@ const userSchema = Joi.object({
       }),
   
     photoUrl: Joi.string()
-      .uri()
-      .required()
+     
       .messages({
         "string.uri": "Photo URL must be a valid URL.",
-        "string.empty": "Photo URL is required.",
-        "any.required": "Photo URL is required."
       }),
   
     password: Joi.string()
@@ -53,10 +50,8 @@ const userSchema = Joi.object({
       }),
   
     online: Joi.boolean()
-      .required()
       .messages({
         "boolean.base": "Online must be a boolean.",
-        "any.required": "Online is required."
       }),
   
     country: Joi.string()

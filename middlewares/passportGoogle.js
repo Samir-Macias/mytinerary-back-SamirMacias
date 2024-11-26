@@ -23,11 +23,11 @@ export default passport.use(
                         10
                     );                    
                     user = new User({
-                        firstname: profile.name.givenName,
-                        lastname: profile.name.familyName,
+                        firstName: profile.name.givenName,
+                        lastName: profile.name.familyName,
                         email: profile.emails[0].value,
                         password: hashedPassword,
-                        photo: profile.photos[0].value,
+                        photoUrl: profile.photos[0].value,
                         country: null,
                         online: false,
                     })
